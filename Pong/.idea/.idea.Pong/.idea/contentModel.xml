@@ -8,6 +8,7 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="BallMovement.cs" t="Include" />
+          <e p="EnemyBehaviour.cs" t="Include" />
           <e p="PlayerMovement.cs" t="Include" />
           <e p="ScreenEdgeColliders.cs" t="Include" />
         </e>
