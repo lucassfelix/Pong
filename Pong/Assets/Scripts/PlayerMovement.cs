@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     
     private Rigidbody2D _rb;
     private Vector2 _movement;
+    private Vector2 _initialPosition;
     
     void Start()
     {
@@ -24,11 +25,17 @@ public class PlayerMovement : MonoBehaviour
         var width = cam.pixelWidth;
         var height = cam.pixelHeight;
         
-        var initialPosition = Camera.main.ScreenToWorldPoint( new Vector3(width / 6f,height/2f,0));
+        _initialPosition = Camera.main.ScreenToWorldPoint( new Vector3(width / 6f,height/2f,0));
 
-        _rb.position = initialPosition;
+        _rb.position = _initialPosition;
     }
 
+    public void ResetPositions()
+    {
+        _rb.velocity = Vector2.zero;
+        _rb.position = _initialPosition;
+    }
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.name == "Borders")

@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
     private Rigidbody2D _ballrb;
     private Vector2 _direction;
     private Vector2 _center;
+    private Vector2 _initialPosition;
     
     void Start()
     {
@@ -26,9 +27,15 @@ public class EnemyBehaviour : MonoBehaviour
         var width = cam.pixelWidth;
         var height = cam.pixelHeight;
         
-        var initialPosition = Camera.main.ScreenToWorldPoint( new Vector3(width - (width / 6f),height/2f,0));
+        _initialPosition = Camera.main.ScreenToWorldPoint( new Vector3(width - (width / 6f),height/2f,0));
 
-        _rb.position = initialPosition;
+        _rb.position = _initialPosition;
+    }
+    
+    public void ResetPositions()
+    {
+        _rb.velocity = Vector2.zero;
+        _rb.position = _initialPosition;
     }
     
     void Update()
