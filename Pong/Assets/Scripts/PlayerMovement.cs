@@ -28,7 +28,15 @@ public class PlayerMovement : MonoBehaviour
 
         _rb.position = initialPosition;
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.name == "Borders")
+        {
+            _rb.velocity = Vector2.zero;
+        }
+    }
+
     void Update()
     {
         _movement = new Vector2 (0,Input.GetAxis("Vertical"));
