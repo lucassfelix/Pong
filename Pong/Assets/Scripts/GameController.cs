@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class GameController : MonoBehaviour
     public GameObject ball;
     public GameObject playerGB;
     public GameObject opponent;
-
+    public Text score;
+    
     private int[] _score;
     private float _ballPosition;
 
@@ -25,10 +27,12 @@ public class GameController : MonoBehaviour
 
     }
 
-    void RegisterScore(int player)
+    private void RegisterScore(int player)
     {
         _score[player]++;
-        Debug.Log(_score[0] + " - " + _score[1]);
+        
+        var scoreString = _score[0] + "-" + _score[1];
+        score.text = scoreString;
         ball.BroadcastMessage("ResetPositions",player);
         playerGB.BroadcastMessage("ResetPositions");
         opponent.BroadcastMessage("ResetPositions");
@@ -39,11 +43,6 @@ public class GameController : MonoBehaviour
     {
         _ballPosition = _cam.WorldToScreenPoint(ball.transform.position).x;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log(_ballPosition);
-        }
-        
         //Check for winners
         if (_ballPosition < 10)
         {

@@ -6,12 +6,14 @@ using UnityEngine.Assertions.Must;
 
 public class BallMovement : MonoBehaviour
 {
-    [Range(1f,2f)] public float velocityRate;
+    [Range(1f,2f)] public float velocityRate = 1.1f;
 
     public float maxVelocity;
     
     private Rigidbody2D _rb;
     private Vector2 _direction;
+
+    private const float InitialVelocity = 2f;
     
     
     void Start()
@@ -19,17 +21,14 @@ public class BallMovement : MonoBehaviour
        _rb = GetComponent<Rigidbody2D>();
 
        _direction = Vector2.left;
-       velocityRate = 1.1f;
-       
-       _rb.velocity = velocityRate * _direction;
+       _rb.velocity = InitialVelocity * _direction;
     }
 
     public void ResetPositions(int playerScored)
     {
         _rb.position = new Vector2(0,0);
         _direction = playerScored == 0 ? Vector2.right : Vector2.left;
-        velocityRate = 1.1f;
-        _rb.velocity = velocityRate * _direction;
+        _rb.velocity = InitialVelocity * _direction;
     }
 
     void OnCollisionEnter2D(Collision2D other)
